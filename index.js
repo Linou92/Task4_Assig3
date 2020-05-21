@@ -1,5 +1,6 @@
 const http = require('http');
-const port = process.env.PORT || 3000;
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
@@ -7,6 +8,6 @@ const server = http.createServer((req, res) => {
   res.end(msg);
 });
 
-server.listen(port, () => {
+server.listen(port,ip, () => {
   console.log(`Server running on http://localhost:${port}/`);
 });
